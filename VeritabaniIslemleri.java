@@ -9,8 +9,8 @@ public class VeritabaniIslemleri {
             boolean girisDurumu;
 
             /***** Bağlantı kurulumu *****/
-            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Odev",
-                    "postgres", "qwerasdfzxcv660");
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/G171210009_DB",
+                    "postgres", "123456789");
             if (conn != null)
                 System.out.println("Veritabanına bağlandı!");
             else

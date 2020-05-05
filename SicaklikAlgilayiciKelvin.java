@@ -9,7 +9,7 @@ public class SicaklikAlgilayiciKelvin implements ISicaklikAlgilayici {
 
         Random rand = new Random();
         int randomValue = rand.nextInt(60) + 273;
-        Log.getInstance().ekranaYazln("Sıcaklık: " + randomValue + "°F");
+        Log.getInstance().ekranaYazln("Sıcaklık: " + randomValue + "°K");
         return randomValue;
     }
 }

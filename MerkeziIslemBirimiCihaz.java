@@ -12,18 +12,19 @@ public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
 
     public MerkeziIslemBirimiCihaz(){
         this.sicaklikAlgilayici = new SicaklikAlgilayiciKelvin();
-        this.eyleyici = new Eyleyici();
+        this.eyleyici = new EyleyiciX();
         this.publisher = new Publisher();
 
+        this.tur = "°K";
         this.sonSicaklik = 25;
-        this.publisher.attach(this.eyleyici.getKritikSogutucu());
+        this.publisher.attach(this.eyleyici.getKritikSogutma());
     }
 
     @Override
     public void sicaklikOku() throws InterruptedException {
         this.sonSicaklik = this.sicaklikAlgilayici.sicaklikOku();
         if(this.sonSicaklik >= 40){
-            this.sonSicaklik = this.publisher.kritikDurumBildir("***Sıcaklık Kritik Eşiğin Üzerinde!!***",this.sonSicaklik, this.eyleyici);
+            this.sonSicaklik = this.publisher.kritikDurumBildir("***Sıcaklık Kritik Eşiğin Üzerinde!!***",this.sonSicaklik, this.eyleyici, this.tur);
         }
     }
 

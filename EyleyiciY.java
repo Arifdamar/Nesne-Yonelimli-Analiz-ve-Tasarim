@@ -1,23 +1,23 @@
 package G171210009;
 
-public class Eyleyici implements IEyleyici{
+public class EyleyiciY implements IEyleyici {
 
-    KritikSogutucu kritikSogutucu;
+    KritikSogutma kritikSogutma;
 
-    public Eyleyici(){
-        this.kritikSogutucu = new KritikSogutucu();
+    public EyleyiciY() {
+        this.kritikSogutma = new KritikSogutma();
     }
 
-    public KritikSogutucu getKritikSogutucu(){
-        return this.kritikSogutucu;
+    public KritikSogutma getKritikSogutma() {
+        return this.kritikSogutma;
     }
 
     @Override
     public int sogutucuAc(int sicaklik, String tur) throws InterruptedException {
-        Thread.sleep(1000);
         Log.getInstance().ekranaYazln("Soğutucu Açılıyor... Sıcaklık Düşürülüyor...");
+        Thread.sleep(2000);
         Log.getInstance().ekranaYaz("Sıcaklık, " + sicaklik + " " + tur + "'den ");
-        sicaklik -= 10;
+        sicaklik -= 15;
         Log.getInstance().ekranaYaz(sicaklik + " " + tur + "'e düşürüldü...\n");
         return sicaklik;
     }
@@ -25,8 +25,7 @@ public class Eyleyici implements IEyleyici{
     @Override
     public void sogutucuKapat() throws InterruptedException {
         Log.getInstance().ekranaYazln("Soğutucu Kapatılıyor...");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         Log.getInstance().ekranaYazln("Soğutucu Kapatıldı...");
     }
-
 }

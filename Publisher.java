@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Publisher implements ISubject {
 
-    private List<IObserver> subscribers = new ArrayList<>();
+    private final List<IObserver> subscribers = new ArrayList<>();
 
     @Override
     public void attach(IObserver subscriber) {
@@ -18,10 +18,10 @@ public class Publisher implements ISubject {
     }
 
     @Override
-    public int kritikDurumBildir(String mesaj, int kritikSicaklik, IEyleyici eyleyici) throws InterruptedException {
+    public int kritikDurumBildir(String mesaj, int kritikSicaklik, IEyleyici eyleyici, String tur) throws InterruptedException {
         Log.getInstance().ekranaYazln(mesaj);
         for(IObserver subscriber: subscribers) {
-            kritikSicaklik = subscriber.kritikDurum(kritikSicaklik, eyleyici);
+            kritikSicaklik = subscriber.kritikDurum(kritikSicaklik, eyleyici, tur);
         }
         return kritikSicaklik;
     }
