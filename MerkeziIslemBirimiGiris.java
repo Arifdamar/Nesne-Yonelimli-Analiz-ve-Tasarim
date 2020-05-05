@@ -12,7 +12,6 @@ public class MerkeziIslemBirimiGiris implements IMerkeziIslemBirimiGiris {
     public boolean girisYap(String userName, String password) throws InterruptedException {
         Thread.sleep(1500);
         if(this.veritabani.girisYap(userName,password)) {
-            System.out.println("Yetki verildi...");
             return true;
         }
         else{

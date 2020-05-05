@@ -1,7 +1,7 @@
 package G171210009;
 
 public interface IEyleyici {
-    IObserver getKritikSogutma();
+    IObserver kritikSogutma = new KritikSogutma();
 
     int sogutucuAc(int sicaklik, String tür) throws InterruptedException;
 

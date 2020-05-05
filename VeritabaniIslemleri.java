@@ -4,17 +4,20 @@ import java.sql.*;
 
 public class VeritabaniIslemleri {
 
-    public boolean girisYap(String k_adi, String pass) {
+    public boolean girisYap(String k_adi, String pass) { // Başarılı bir şekilde giriş yapılıp yapılmadığını döndürür
         try {
             boolean girisDurumu;
+            User kullanici = null;
 
             /***** Bağlantı kurulumu *****/
             Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/G171210009_DB",
                     "postgres", "123456789");
             if (conn != null)
                 System.out.println("Veritabanına bağlandı!");
-            else
+            else {
                 System.out.println("Bağlantı girişimi başarısız!");
+                return false;
+            }
 
 
             String sql = "SELECT *  FROM \"_User\" WHERE \"userName\"='" + k_adi + "' and \"password\"='" + pass + "'";
@@ -34,6 +37,9 @@ public class VeritabaniIslemleri {
             }
             else {
                 System.out.println("Giriş başarılı...");
+                kullanici = new User(rs.getInt("Id"), rs.getString("userName"), rs.getString("password"));
+                LogDosya.getInstance().dosyayaYaz("Yeni Oturum... Kullanıcı Bilgileri: Id: " + kullanici.id
+                + " userName: " + kullanici.userName);
                 girisDurumu = true;
             }
 

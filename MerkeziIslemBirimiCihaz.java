@@ -10,21 +10,21 @@ public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
     private String tur;
 
 
-    public MerkeziIslemBirimiCihaz(){
-        this.sicaklikAlgilayici = new SicaklikAlgilayiciKelvin();
+    public MerkeziIslemBirimiCihaz() {
+        this.sicaklikAlgilayici = new SicaklikAlgilayiciCelsius();
         this.eyleyici = new EyleyiciX();
         this.publisher = new Publisher();
 
-        this.tur = "°K";
+        this.tur = "°C";
         this.sonSicaklik = 25;
-        this.publisher.attach(this.eyleyici.getKritikSogutma());
+        this.publisher.attach(this.eyleyici.kritikSogutma);
     }
 
     @Override
     public void sicaklikOku() throws InterruptedException {
         this.sonSicaklik = this.sicaklikAlgilayici.sicaklikOku();
-        if(this.sonSicaklik >= 40){
-            this.sonSicaklik = this.publisher.kritikDurumBildir("***Sıcaklık Kritik Eşiğin Üzerinde!!***",this.sonSicaklik, this.eyleyici, this.tur);
+        if (this.sonSicaklik >= (tur == "°C" ? 40 : 40 + 273)) {
+            this.sonSicaklik = this.publisher.kritikDurumBildir("***Sıcaklık Kritik Eşiğin Üzerinde!!***", this.sonSicaklik, this.eyleyici, this.tur);
         }
     }
 
@@ -37,7 +37,6 @@ public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
     public void sogutucuKapat() throws InterruptedException {
         this.eyleyici.sogutucuKapat();
     }
-
 
 
 }
