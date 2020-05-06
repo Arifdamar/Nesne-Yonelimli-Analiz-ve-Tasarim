@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
-public class LogDosya {
+public class LogDosya implements ILogger {
 
     private static LogDosya instance;
     private PrintWriter out;
@@ -24,7 +24,8 @@ public class LogDosya {
         return instance;
     }
 
-    public void dosyayaYaz(String mesaj) {
+    @Override
+    public void log(String mesaj) {
         out.println(LocalDateTime.now() + ":" + mesaj);
     }
 }

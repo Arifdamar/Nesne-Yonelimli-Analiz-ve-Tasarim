@@ -45,7 +45,7 @@ public class VeritabaniIslemleri {
                 System.out.println("Giriş başarılı...");
 
                 // Oturum, kullanıcı bilgileriyle birlikte dosyaya loglanır
-                LogDosya.getInstance().dosyayaYaz("Yeni Oturum... Kullanıcı Bilgileri: Id: " + rs.getInt("Id")
+                LogDosya.getInstance().log("Yeni Oturum... Kullanıcı Bilgileri: Id: " + rs.getInt("Id")
                         + " userName: " + rs.getString("userName"));
                 girisDurumu = true;
             }

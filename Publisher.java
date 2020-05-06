@@ -19,7 +19,7 @@ public class Publisher implements ISubject {
 
     @Override
     public int kritikSicaklikBildir(String mesaj, int kritikSicaklik, IEyleyici eyleyici, String tur) throws InterruptedException {
-        LogEkran.getInstance().ekranaYazln(mesaj);
+        LogEkran.getInstance().log(mesaj);
         for (IObserver subscriber : subscribers) {
             kritikSicaklik = subscriber.kritikDurum(kritikSicaklik, eyleyici, tur);
         }

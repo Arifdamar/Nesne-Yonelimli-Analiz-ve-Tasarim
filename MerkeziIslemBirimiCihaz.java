@@ -30,6 +30,7 @@ public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
 
         if (this.sonSicaklik >= this.kritikSicaklik) {
             this.sonSicaklik = this.publisher.kritikSicaklikBildir("***Sıcaklık Kritik Eşiğin Üzerinde!!***", this.sonSicaklik, this.eyleyici, this.tur);
+            this.eyleyici.sogutucuKapat();
         }
     }
 

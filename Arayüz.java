@@ -14,7 +14,7 @@ public class Arayüz {
         /* Durum,
             1 ise -> Cihaz Kapalı (cihaz aç)
             2 ise -> Cihaz Beklemede(soğutucu aç, kapat, sıcaklık oku)
-            3 ise -> Cihazın sıcaklığı okuduğu durum
+            3 ise -> Cihaz Algılama modunda (sıcaklık oku)
             4 ise -> Cihazın soğutucuyu açıp kapatması esnasındaki durum
          */
         int durum = 1; // Cihaz kapalı olarak başlar

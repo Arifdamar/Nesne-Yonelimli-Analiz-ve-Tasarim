@@ -11,11 +11,11 @@ public class SicaklikAlgilayiciKelvin implements ISicaklikAlgilayici {
 
     @Override
     public List<Serializable> sicaklikOku() throws InterruptedException {
-        LogEkran.getInstance().ekranaYazln("Sıcaklık Okunuyor...");
+        LogEkran.getInstance().log("Sıcaklık Okunuyor...");
         Random rand = new Random();
         int randomValue = rand.nextInt(60) + 273;
         Thread.sleep(1000);
-        LogEkran.getInstance().ekranaYazln("Sıcaklık: " + randomValue + "°K");
+        LogEkran.getInstance().log("Sıcaklık: " + randomValue + "°K");
         return Arrays.asList(randomValue, this.kritikSicaklik, this.tur);
     }
 }
