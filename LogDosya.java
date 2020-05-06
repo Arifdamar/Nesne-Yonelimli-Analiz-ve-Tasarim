@@ -10,10 +10,12 @@ public class LogDosya {
     private static LogDosya instance;
     private PrintWriter out;
 
-    private LogDosya(){
+    private LogDosya() {
         try {
-            out = new PrintWriter(new FileWriter("log.txt",true), true);
-        } catch (IOException e) {e.printStackTrace();}
+            out = new PrintWriter(new FileWriter("log.txt", true), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static synchronized LogDosya getInstance() {
@@ -23,6 +25,6 @@ public class LogDosya {
     }
 
     public void dosyayaYaz(String mesaj) {
-        out.println(LocalDateTime.now()+":"+mesaj);
+        out.println(LocalDateTime.now() + ":" + mesaj);
     }
 }

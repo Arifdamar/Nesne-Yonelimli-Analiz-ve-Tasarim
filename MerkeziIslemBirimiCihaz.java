@@ -1,13 +1,16 @@
 package G171210009;
 
+import java.io.Serializable;
+import java.util.List;
+
 public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
     private final ISicaklikAlgilayici sicaklikAlgilayici;
     private final IEyleyici eyleyici;
     private final ISubject publisher;
 
     private int sonSicaklik;
-    private boolean yetki;
     private String tur;
+    private int kritikSicaklik;
 
 
     public MerkeziIslemBirimiCihaz() {
@@ -15,16 +18,18 @@ public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
         this.eyleyici = new EyleyiciX();
         this.publisher = new Publisher();
 
-        this.tur = "°C";
-        this.sonSicaklik = 25;
         this.publisher.attach(this.eyleyici.kritikSogutma);
     }
 
     @Override
     public void sicaklikOku() throws InterruptedException {
-        this.sonSicaklik = this.sicaklikAlgilayici.sicaklikOku();
-        if (this.sonSicaklik >= (tur == "°C" ? 40 : 40 + 273)) {
-            this.sonSicaklik = this.publisher.kritikDurumBildir("***Sıcaklık Kritik Eşiğin Üzerinde!!***", this.sonSicaklik, this.eyleyici, this.tur);
+        List<Serializable> algilayiciBilgileri = this.sicaklikAlgilayici.sicaklikOku();
+        this.sonSicaklik = (int) algilayiciBilgileri.get(0); // 0. elemanda sıcaklık bilgisi bulunur
+        this.kritikSicaklik = (int) algilayiciBilgileri.get(1); // 1. elemanda kritik sıcaklık bilgisi bulunur
+        this.tur = (String) algilayiciBilgileri.get(2); // 2. elemanda algılayıcının hangi türde sıcaklık okuduğu bilgisi bulunur
+
+        if (this.sonSicaklik >= this.kritikSicaklik) {
+            this.sonSicaklik = this.publisher.kritikSicaklikBildir("***Sıcaklık Kritik Eşiğin Üzerinde!!***", this.sonSicaklik, this.eyleyici, this.tur);
         }
     }
 
@@ -37,6 +42,5 @@ public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
     public void sogutucuKapat() throws InterruptedException {
         this.eyleyici.sogutucuKapat();
     }
-
 
 }

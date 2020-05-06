@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class LogEkran {
     private static LogEkran instance;
 
-    private LogEkran(){
+    private LogEkran() {
 
     }
 

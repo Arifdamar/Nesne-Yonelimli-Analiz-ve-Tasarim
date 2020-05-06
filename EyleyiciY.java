@@ -7,7 +7,7 @@ public class EyleyiciY implements IEyleyici {
         LogEkran.getInstance().ekranaYazln("Soğutucu Açılıyor... Sıcaklık Düşürülüyor...");
         Thread.sleep(2000);
         sicaklik -= 15;
-        LogEkran.getInstance().ekranaYazln("Sıcaklık, " + (sicaklik+15) + " " + tur + "'den " + sicaklik + " " + tur + "'e düşürüldü...");
+        LogEkran.getInstance().ekranaYazln("Sıcaklık, " + (sicaklik + 15) + " " + tur + "'den " + sicaklik + " " + tur + "'e düşürüldü...");
         return sicaklik;
     }
 

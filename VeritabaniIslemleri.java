@@ -4,42 +4,49 @@ import java.sql.*;
 
 public class VeritabaniIslemleri {
 
-    public boolean girisYap(String k_adi, String pass) { // Başarılı bir şekilde giriş yapılıp yapılmadığını döndürür
-        try {
-            boolean girisDurumu;
-            User kullanici = null;
+    private Connection baglan() {
 
-            /***** Bağlantı kurulumu *****/
-            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/G171210009_DB",
+        Connection conn = null;
+
+        try {
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/G171210009_DB",
                     "postgres", "123456789");
             if (conn != null)
                 System.out.println("Veritabanına bağlandı!");
-            else {
+            else
                 System.out.println("Bağlantı girişimi başarısız!");
-                return false;
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
 
+    public boolean girisYap(String k_adi, String pass) { // Başarılı bir şekilde giriş yapılıp yapılmadığını döndürür
+        try {
+            boolean girisDurumu;
 
+            Connection conn = this.baglan(); // Veritabanı bağlantısı yapılır
+
+            // Konsoldan girilen bilgilere uygun kişiyi veritabanından seçmek için gerekli SQL sorgusu yazılır
             String sql = "SELECT *  FROM \"_User\" WHERE \"userName\"='" + k_adi + "' and \"password\"='" + pass + "'";
 
-            /***** Sorgu çalıştırma *****/
+            // Sorgu çalıştırılır
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
-
-            /***** Bağlantı sonlandırma *****/
+            // Veritabanı bağlantısı sonlandırılır
             conn.close();
 
             Thread.sleep(500);
-            if (rs.next() == false) {
+            if (!rs.next()) { // Veritabanından dönen ResultSet boş ise böyle bir kullanıcı yoktur
                 System.out.println("Böyle bir kullanıcı bulunamadı...");
                 girisDurumu = false;
-            }
-            else {
+            } else { // ResultSet boş değilse giriş başarılıdır
                 System.out.println("Giriş başarılı...");
-                kullanici = new User(rs.getInt("Id"), rs.getString("userName"), rs.getString("password"));
-                LogDosya.getInstance().dosyayaYaz("Yeni Oturum... Kullanıcı Bilgileri: Id: " + kullanici.id
-                + " userName: " + kullanici.userName);
+
+                // Oturum, kullanıcı bilgileriyle birlikte dosyaya loglanır
+                LogDosya.getInstance().dosyayaYaz("Yeni Oturum... Kullanıcı Bilgileri: Id: " + rs.getInt("Id")
+                        + " userName: " + rs.getString("userName"));
                 girisDurumu = true;
             }
 
@@ -53,5 +60,4 @@ public class VeritabaniIslemleri {
             return false;
         }
     }
-
 }

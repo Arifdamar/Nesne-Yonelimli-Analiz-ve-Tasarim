@@ -11,10 +11,9 @@ public class MerkeziIslemBirimiGiris implements IMerkeziIslemBirimiGiris {
     @Override
     public boolean girisYap(String userName, String password) throws InterruptedException {
         Thread.sleep(1500);
-        if(this.veritabani.girisYap(userName,password)) {
+        if (this.veritabani.girisYap(userName, password)) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
