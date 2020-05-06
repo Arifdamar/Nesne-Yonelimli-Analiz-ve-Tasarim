@@ -2,7 +2,7 @@ package G171210009;
 
 import java.sql.*;
 
-public class VeritabaniIslemleri {
+public class VeritabaniIslemleri implements IVeritabaniIslemleri {
 
     private Connection baglan() {
 
@@ -21,6 +21,7 @@ public class VeritabaniIslemleri {
         return conn;
     }
 
+    @Override
     public boolean girisYap(String k_adi, String pass) { // Başarılı bir şekilde giriş yapılıp yapılmadığını döndürür
         try {
             boolean girisDurumu;

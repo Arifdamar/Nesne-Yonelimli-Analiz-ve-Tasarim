@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
+
+    // Program to Interface, not implementation
     private final ISicaklikAlgilayici sicaklikAlgilayici;
     private final IEyleyici eyleyici;
     private final ISubject publisher;
@@ -21,6 +23,13 @@ public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
         this.publisher.attach(this.eyleyici.kritikSogutma);
     }
 
+    private void kritikSicaklikKontrol() throws InterruptedException {
+        if (this.sonSicaklik >= this.kritikSicaklik) {
+            this.sonSicaklik = this.publisher.kritikSicaklikBildir("***Sıcaklık Kritik Eşiğin Üzerinde!!***", this.sonSicaklik, this.eyleyici, this.tur);
+            this.eyleyici.sogutucuKapat();
+        }
+    }
+
     @Override
     public void sicaklikOku() throws InterruptedException {
         List<Serializable> algilayiciBilgileri = this.sicaklikAlgilayici.sicaklikOku();
@@ -28,10 +37,7 @@ public class MerkeziIslemBirimiCihaz implements IMerkeziIslemBirimiCihaz {
         this.kritikSicaklik = (int) algilayiciBilgileri.get(1); // 1. elemanda kritik sıcaklık bilgisi bulunur
         this.tur = (String) algilayiciBilgileri.get(2); // 2. elemanda algılayıcının hangi türde sıcaklık okuduğu bilgisi bulunur
 
-        if (this.sonSicaklik >= this.kritikSicaklik) {
-            this.sonSicaklik = this.publisher.kritikSicaklikBildir("***Sıcaklık Kritik Eşiğin Üzerinde!!***", this.sonSicaklik, this.eyleyici, this.tur);
-            this.eyleyici.sogutucuKapat();
-        }
+        this.kritikSicaklikKontrol();
     }
 
     @Override

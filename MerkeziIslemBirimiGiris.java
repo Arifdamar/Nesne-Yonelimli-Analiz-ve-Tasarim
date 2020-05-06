@@ -2,7 +2,7 @@ package G171210009;
 
 public class MerkeziIslemBirimiGiris implements IMerkeziIslemBirimiGiris {
 
-    private final VeritabaniIslemleri veritabani;
+    private final IVeritabaniIslemleri veritabani;
 
     public MerkeziIslemBirimiGiris() {
         this.veritabani = new VeritabaniIslemleri();

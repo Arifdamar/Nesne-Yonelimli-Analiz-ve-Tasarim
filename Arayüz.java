@@ -7,7 +7,7 @@ public class Arayüz {
     public static void main(String[] args) throws InterruptedException {
 
         Scanner scan = new Scanner(System.in);
-        MerkeziIslemBirimiGiris giris = new MerkeziIslemBirimiGiris();
+        IMerkeziIslemBirimiGiris giris = new MerkeziIslemBirimiGiris();
 
         String kullaniciAdi, sifre;
 
@@ -68,8 +68,9 @@ public class Arayüz {
                         islemci.sogutucuKapat();
                         sogutucuDurumu = false;
                     } else if (secim == 3) {
-                        System.out.println("Çıkış Yapılıyor...");
+                        LogEkran.getInstance().log("Çıkış Yapılıyor...");
                         Thread.sleep(1000);
+                        LogEkran.getInstance().log("Cihaz Kapatılıyor");
                     } else {
                         System.out.println("**Lütfen Geçerli Bir Seçenek Giriniz**");
                     }
